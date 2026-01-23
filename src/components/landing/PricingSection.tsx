@@ -11,6 +11,7 @@ import {
   viewportSettings,
 } from "@/lib/animations";
 import type { PricingPlan } from "@/types";
+import MobileCarousel from "@/components/ui/MobileCarousel";
 
 const pricingPlans: PricingPlan[] = [
   {
@@ -70,7 +71,7 @@ export default function PricingSection() {
   };
 
   return (
-    <section id="pricing" className=" relative overflow-hidden">
+    <section id="pricing" className=" relative overflow-hidden pt-6">
       <div className="relative z-10 container-custom">
         {/* Background gradient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-radial from-[#00E5FF]/10 via-[#00E5FF]/5 to-transparent blur-3xl pointer-events-none" />
@@ -84,7 +85,7 @@ export default function PricingSection() {
         >
           {/* Section Header */}
           <motion.div variants={fadeInUp} className="text-center space-y-6">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black glow-text text-white tracking-tight">
               Explora nuestros planes
             </h2>
             <p className="text-lg text-white/90 max-w-2xl mx-auto text-center">
@@ -92,12 +93,8 @@ export default function PricingSection() {
               ajuste a tus necesidades.
             </p>
           </motion.div>
-
           {/* Pricing Cards Grid */}
-          <motion.div
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10"
-          >
+          <MobileCarousel className="grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {pricingPlans.map((plan) => (
               <motion.div
                 key={plan.id}
@@ -241,8 +238,7 @@ export default function PricingSection() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-
+          </MobileCarousel>
           {/* Guarantee text */}
           <motion.p
             variants={fadeInUp}

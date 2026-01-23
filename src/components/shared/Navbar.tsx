@@ -104,7 +104,7 @@ export default function Header() {
                 <Button
                   variant="secondary"
                   size="sm"
-                  href="#contact"
+                  href="/contact"
                   className="whitespace-nowrap !py-2 !px-4 !text-sm"
                 >
                   Contáctanos
@@ -161,6 +161,14 @@ export default function Header() {
                   href="#pricing"
                 >
                   Comienza Gratis
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="md"
+                  className="w-full mt-2"
+                  href="/contact"
+                >
+                  Contáctanos
                 </Button>
               </div>
             </div>

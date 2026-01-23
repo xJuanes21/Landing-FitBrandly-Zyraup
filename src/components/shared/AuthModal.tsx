@@ -37,7 +37,7 @@ export default function AuthModal({
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="glass-liquid rounded-3xl p-8 max-w-2xl w-full border border-white/20 bg-[#0A0A0A]"
+            className="glass-liquid rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-white/20 bg-[#0A0A0A] max-h-[90vh] overflow-y-auto mx-4 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">

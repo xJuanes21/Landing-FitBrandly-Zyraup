@@ -70,11 +70,9 @@ export default function BenefitsTimeline() {
             variants={fadeInUp}
             className="text-center space-y-4 flex flex-col items-center max-w-3xl"
           >
-            <span className="text-[#00E5FF] font-semibold uppercase tracking-[0.2em] text-sm">
-              TU CAMINO AL ÉXITO
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
-              Benefits <span className="gradient-text">Timeline</span>
+            <h2 className="heading-xl text-white">
+              Tu camino al{" "}
+              <span className="gradient-text glow-text">Éxito</span>
             </h2>
           </motion.div>
 

@@ -443,6 +443,15 @@ body {
   background: var(--azul-neon);
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 /* ============================================
    RESPONSIVE UTILITIES
    ============================================ */

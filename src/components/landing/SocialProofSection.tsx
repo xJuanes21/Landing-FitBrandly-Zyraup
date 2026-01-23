@@ -11,6 +11,7 @@ import {
   TrendingUp,
   Award,
 } from "lucide-react";
+import Image from "next/image";
 import { useCountUp } from "@/hooks/useCountUp";
 import {
   fadeInUp,
@@ -20,9 +21,9 @@ import {
 } from "@/lib/animations";
 
 const brandLogos = [
-  { id: "1", icon: Users },
-  { id: "2", icon: Dumbbell },
-  { id: "3", icon: Award },
+  { id: "1", image: "/icons/icon1.png", alt: "Brand 1" },
+  { id: "2", image: "/icons/icon2.png", alt: "Brand 2" },
+  { id: "3", image: "/icons/icon.png", alt: "Brand 3" },
   { id: "4", icon: TrendingUp },
   { id: "5", icon: Shield },
   { id: "6", icon: Zap },
@@ -72,10 +73,10 @@ export default function SocialProofSection() {
               </div>
             </motion.div>
 
-            <p className="text-xl md:text-2xl lg:text-3xl text-white font-medium leading-tight">
+            <p className="text-xl md:text-2xl lg:text-3xl text-white font-bold leading-tight tracking-tighter uppercase">
               entrenadores ya
               <br />
-              <span className="text-gray-400 font-normal">
+              <span className="text-gray-400 font-bold tracking-tighter uppercase">
                 construyendo su imperio
               </span>
             </p>
@@ -98,18 +99,39 @@ export default function SocialProofSection() {
                   }}
                   className="group cursor-default"
                 >
-                  <div className="relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 hover:border-white/20 transition-all duration-300 h-[140px] flex items-center justify-center">
+                  <div className="relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 hover:border-[#00E5FF]/30 transition-all duration-300 h-[140px] flex items-center justify-center">
+                    {/* Neon Corner - Top Left */}
+                    <div className="absolute top-0 left-0 w-16 h-16 pointer-events-none z-20">
+                      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#00E5FF] to-transparent shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
+                      <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-[#00E5FF] to-transparent shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
+                      <div className="absolute top-0 left-0 w-8 h-8 bg-[#00E5FF]/20 blur-xl rounded-full" />
+                    </div>
+
                     {/* Top-left white glow spot */}
-                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-white/10 blur-[30px] rounded-full group-hover:bg-[#00E5FF]/20 group-hover:blur-[40px] transition-all duration-500" />
+                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-white blur-[40px] rounded-full  group-hover:blur-[50px] transition-all duration-500" />
 
                     {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-10" />
 
                     <div className="relative z-10 p-4 transition-transform duration-300 group-hover:scale-110">
-                      <Icon
-                        className="w-10 h-10 text-white/70 group-hover:text-white transition-colors duration-300"
-                        strokeWidth={1.5}
-                      />
+                      {brand.image ? (
+                        <div className="relative w-20 h-20">
+                          <Image
+                            src={brand.image}
+                            alt={brand.alt || "Brand Logo"}
+                            fill
+                            unoptimized
+                            className="object-contain"
+                          />
+                        </div>
+                      ) : (
+                        Icon && (
+                          <Icon
+                            className="w-10 h-10 text-white/70 group-hover:text-white transition-colors duration-300"
+                            strokeWidth={1.5}
+                          />
+                        )
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -121,7 +143,7 @@ export default function SocialProofSection() {
         {/* Trust Badges - Closer spacing */}
         <motion.div
           variants={fadeInUp}
-          className="flex flex-wrap justify-center lg:justify-start items-center gap-4 md:gap-6 pt-4 border-t border-white/5"
+          className="flex flex-wrap justify-center lg:justify-center items-center gap-4 md:gap-6 pt-4 border-t border-white/5"
         >
           {trustBadges.map((badge) => {
             const Icon = badge.icon;
@@ -131,11 +153,12 @@ export default function SocialProofSection() {
                 variants={staggerItem}
                 className="group relative"
               >
-                <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 hover:border-[#00E5FF]/30 transition-all duration-300">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00E5FF]/10 text-[#00E5FF]">
-                    <Icon className="w-4 h-4" />
+                <div className="absolute inset-0 bg-[#00E5FF]/20 blur-xl rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-500" />
+                <div className="relative flex items-center gap-3 px-6 py-3 rounded-full border border-[#00E5FF]/30 shadow-[0_0_20px_rgba(0,229,255,0.1)] hover:shadow-[0_0_40px_rgba(0,229,255,0.6)] hover:border-[#00E5FF] transition-all duration-300 bg-black/40 backdrop-blur-sm group-hover:bg-[#00E5FF]/10">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00E5FF]/20 shadow-[0_0_15px_rgba(0,229,255,0.5)] group-hover:bg-[#00E5FF] group-hover:text-black group-hover:shadow-[0_0_25px_rgba(0,229,255,1)] transition-all duration-300">
+                    <Icon className="w-4 h-4 text-[#00E5FF] group-hover:text-black transition-colors" />
                   </div>
-                  <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                  <span className="text-sm font-bold text-gray-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.5)] transition-all">
                     {badge.label}
                   </span>
                 </div>

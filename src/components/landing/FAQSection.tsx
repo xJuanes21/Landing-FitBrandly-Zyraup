@@ -107,7 +107,7 @@ export default function FAQSection() {
   return (
     <section
       id="faq"
-      className=" py-20 md:py-32 relative overflow-hidden flex flex-col items-center justify-center"
+      className=" relative overflow-hidden flex flex-col items-center justify-center"
     >
       {/* Background gradient glow */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A]" />
@@ -131,7 +131,7 @@ export default function FAQSection() {
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
               ¿Tienes dudas?{" "}
-              <span className="gradient-text block mt-2">
+              <span className="gradient-text glow-text block mt-2">
                 Te las resolvemos
               </span>
             </h2>
@@ -156,7 +156,7 @@ export default function FAQSection() {
           <motion.div variants={fadeInUp} className="text-center pt-8">
             <p className="text-white/60 mb-6">¿No encuentras lo que buscas?</p>
             <motion.a
-              href="#contact"
+              href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold hover:bg-white/10 hover:border-[#00E5FF]/30 transition-all duration-300"
