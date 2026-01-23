@@ -303,7 +303,7 @@ export default function Footer() {
               >
                 <Heart className="w-4 h-4 text-[#00e5ff] fill-[#00e5ff]" />
               </motion.div>
-              <span>para entrenadores fitness</span>
+              <span>por Zyraup Team</span>
             </motion.div>
 
             <motion.div

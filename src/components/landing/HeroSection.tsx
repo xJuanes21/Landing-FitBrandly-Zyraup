@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -53,10 +54,16 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-20"
     >
       {/* Animated Background with particles effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A] z-0" />
+
+      {/* Hero Asset Background - Fixed Parallax */}
+      <div
+        className="absolute inset-0 z-0 opacity-20 bg-fixed bg-center bg-cover bg-no-repeat"
+        style={{ backgroundImage: "url('/bg-hero.svg')" }}
+      />
 
       {/* Animated Grid Pattern */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+      <div className="absolute inset-0 grid-pattern opacity-20 z-0" />
 
       {/* Glowing Orbs - Más sutiles y estratégicos */}
       <motion.div
@@ -107,27 +114,27 @@ export default function HeroSection() {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="space-y-8 flex flex-col items-center"
+          className="space-y-10 flex flex-col items-center"
         >
-          {/* Badge superior */}
+          {/* Badge superior con efecto de luz */}
           <motion.div
             variants={scaleIn}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[#00E5FF]/20 mb-4"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#00E5FF]/5 border border-[#00E5FF]/30 shadow-[0_0_30px_rgba(0,229,255,0.2)] mb-6 backdrop-blur-md"
           >
-            <Sparkles className="w-4 h-4 text-[#00E5FF]" />
-            <span className="text-sm font-medium text-[#F5F5F5]">
+            <Sparkles className="w-4 h-4 text-[#00E5FF] drop-shadow-[0_0_5px_rgba(0,229,255,0.8)]" />
+            <span className="text-sm font-semibold text-[#F5F5F5] tracking-wide shadow-black drop-shadow-sm">
               Revolucionando la industria fitness
             </span>
           </motion.div>
 
-          {/* Main Headline - Más impactante */}
+          {/* Main Headline */}
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white max-w-6xl mx-auto leading-[1.1] tracking-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white max-w-6xl mx-auto leading-[1.1] tracking-tight drop-shadow-2xl"
           >
             Tu marca, tu método,{" "}
             <span className="relative inline-block mt-2">
-              <span className="gradient-text relative z-10">
+              <span className="gradient-text relative z-10 filter drop-shadow-[0_0_20px_rgba(0,229,255,0.4)]">
                 tu imperio fitness
               </span>
               <motion.div
@@ -149,18 +156,20 @@ export default function HeroSection() {
             className="text-lg sm:text-xl lg:text-2xl text-[#F5F5F5]/80 max-w-3xl mx-auto leading-relaxed font-light"
           >
             La plataforma SaaS que convierte entrenadores en{" "}
-            <span className="text-[#00E5FF] font-medium">marcas digitales</span>
+            <span className="text-[#00E5FF] font-medium drop-shadow-[0_0_10px_rgba(0,229,255,0.3)]">
+              marcas digitales
+            </span>
             .
           </motion.p>
 
-          {/* CTAs - Más destacados */}
+          {/* CTAs - En una sola línea */}
           <motion.div
             variants={fadeInUp}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6 w-full max-w-lg mx-auto"
+            className="flex flex-row gap-6 justify-center items-center pt-8 w-full max-w-2xl mx-auto"
           >
             {/* Primary CTA con animación de glow */}
             <motion.div
-              className="relative group w-full sm:w-auto"
+              className="relative group shrink-0"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -178,7 +187,7 @@ export default function HeroSection() {
                 variant="primary"
                 size="lg"
                 href="#pricing"
-                className="relative w-full sm:w-auto justify-center"
+                className="relative min-w-[200px] justify-center shadow-[0_0_20px_rgba(0,229,255,0.3)]"
               >
                 Comienza Gratis 14 Días
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -189,13 +198,13 @@ export default function HeroSection() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto"
+              className="shrink-0"
             >
               <Button
                 variant="secondary"
                 size="lg"
                 href="#video"
-                className="w-full sm:w-auto justify-center"
+                className="min-w-[200px] justify-center border-white/20 hover:bg-white/10"
               >
                 <Play className="w-5 h-5" />
                 Ver Demo en Vivo
@@ -203,16 +212,22 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Trust line - Fixed Wrapping */}
+          {/* Trust line */}
           <motion.p
             variants={fadeInUp}
-            className="text-sm text-[#F5F5F5]/50 max-w-2xl mx-auto flex flex-wrap justify-center gap-4"
+            className="text-sm text-[#F5F5F5]/50 max-w-2xl mx-auto flex flex-wrap justify-center gap-6 pt-4"
           >
-            <span className="whitespace-nowrap">✓ Sin tarjeta de crédito</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="whitespace-nowrap">✓ Cancela cuando quieras</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="whitespace-nowrap">✓ Soporte en español</span>
+            <span className="whitespace-nowrap flex items-center gap-2">
+              <span className="text-[#00E5FF]">✓</span> Sin tarjeta de crédito
+            </span>
+            <span className="hidden sm:inline opacity-30">|</span>
+            <span className="whitespace-nowrap flex items-center gap-2">
+              <span className="text-[#00E5FF]">✓</span> Cancela cuando quieras
+            </span>
+            <span className="hidden sm:inline opacity-30">|</span>
+            <span className="whitespace-nowrap flex items-center gap-2">
+              <span className="text-[#00E5FF]">✓</span> Soporte en español
+            </span>
           </motion.p>
         </motion.div>
       </div>

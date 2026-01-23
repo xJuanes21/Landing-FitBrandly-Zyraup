@@ -42,18 +42,22 @@ export default function SocialProofSection() {
   });
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden bg-[#0A0A0A]">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px]  rounded-full blur-[250px] pointer-events-none" />
+    <section className="py-20 md:py-24 relative overflow-hidden bg-[#0A0A0A] flex flex-col justify-center">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full blur-[200px] pointer-events-none" />
 
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={viewportSettings}
-        className="relative z-10 container-custom"
+        className="relative z-10 container-custom max-w-6xl"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
-          <motion.div variants={fadeInUp} className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+          {/* Left Side: big number text */}
+          <motion.div
+            variants={fadeInUp}
+            className="lg:col-span-5 space-y-4 text-center lg:text-left"
+          >
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -61,35 +65,26 @@ export default function SocialProofSection() {
               <div className="relative inline-block">
                 <div
                   ref={ref}
-                  className="text-7xl sm:text-8xl lg:text-9xl font-black gradient-text relative z-10 tracking-tighter leading-none"
+                  className="text-7xl sm:text-8xl lg:text-[10rem] font-black gradient-text relative z-10 tracking-tighter leading-none filter drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]"
                 >
                   {formattedCount}
                 </div>
-                <motion.div
-                  className="absolute -inset-8 bg-gradient-primary opacity-10 blur-[80px] -z-10"
-                  animate={{
-                    opacity: [0.1, 0.25, 0.1],
-                    scale: [1, 1.15, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
               </div>
             </motion.div>
 
-            <p className="text-xl md:text-2xl lg:text-3xl text-white/80 font-light leading-relaxed max-w-md">
+            <p className="text-xl md:text-2xl lg:text-3xl text-white font-medium leading-tight">
               entrenadores ya
               <br />
-              construyendo su imperio
+              <span className="text-gray-400 font-normal">
+                construyendo su imperio
+              </span>
             </p>
           </motion.div>
 
+          {/* Right Side: Grid */}
           <motion.div
             variants={fadeInUp}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5"
+            className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-4"
           >
             {brandLogos.map((brand, index) => {
               const Icon = brand.icon;
@@ -98,39 +93,24 @@ export default function SocialProofSection() {
                   key={brand.id}
                   variants={staggerItem}
                   whileHover={{
-                    y: -8,
+                    y: -5,
                     transition: { type: "spring", stiffness: 400, damping: 17 },
                   }}
-                  className="group cursor-pointer"
+                  className="group cursor-default"
                 >
-                  <div className="glass-liquid rounded-2xl md:rounded-3xl p-6 md:p-8 transition-all duration-500 hover:border-white/20 relative overflow-hidden flex items-center justify-center min-h-[140px] md:min-h-[160px]">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#00E5FF]/0 via-[#00E5FF]/0 to-[#00B8D4]/0 group-hover:from-[#00E5FF]/8 group-hover:to-[#00B8D4]/8 transition-all duration-500 rounded-2xl md:rounded-3xl" />
+                  <div className="relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 hover:border-white/20 transition-all duration-300 h-[140px] flex items-center justify-center">
+                    {/* Top-left white glow spot */}
+                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-white/10 blur-[30px] rounded-full group-hover:bg-[#00E5FF]/20 group-hover:blur-[40px] transition-all duration-500" />
 
-                    <div className="relative z-10">
-                      <div className="p-3 md:p-4 rounded-xl bg-white/5 group-hover:bg-white/10 transition-all duration-300 group-hover:scale-110">
-                        <Icon
-                          className="w-10 h-10 md:w-12 md:h-12 text-[#00E5FF]"
-                          strokeWidth={1.5}
-                        />
-                      </div>
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
+
+                    <div className="relative z-10 p-4 transition-transform duration-300 group-hover:scale-110">
+                      <Icon
+                        className="w-10 h-10 text-white/70 group-hover:text-white transition-colors duration-300"
+                        strokeWidth={1.5}
+                      />
                     </div>
-
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background:
-                          "linear-gradient(110deg, transparent 40%, rgba(0, 229, 255, 0.15) 50%, transparent 60%)",
-                        backgroundSize: "200% 100%",
-                      }}
-                      animate={{
-                        backgroundPosition: ["200% 0", "-200% 0"],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
                   </div>
                 </motion.div>
               );
@@ -138,9 +118,10 @@ export default function SocialProofSection() {
           </motion.div>
         </div>
 
+        {/* Trust Badges - Closer spacing */}
         <motion.div
           variants={fadeInUp}
-          className="flex flex-wrap justify-center items-center gap-4 md:gap-6"
+          className="flex flex-wrap justify-center lg:justify-start items-center gap-4 md:gap-6 pt-4 border-t border-white/5"
         >
           {trustBadges.map((badge) => {
             const Icon = badge.icon;
@@ -148,26 +129,13 @@ export default function SocialProofSection() {
               <motion.div
                 key={badge.id}
                 variants={staggerItem}
-                whileHover={{
-                  y: -4,
-                  scale: 1.05,
-                  transition: { type: "spring", stiffness: 400, damping: 17 },
-                }}
                 className="group relative"
               >
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#00E5FF]/30 via-[#00B8D4]/30 to-[#00E5FF]/30 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-all duration-300" />
-
-                <div className="relative glass-liquid flex items-center gap-3 px-6 py-4 md:px-8 md:py-5 rounded-full transition-all duration-300 hover:border-[#00E5FF]/50 overflow-hidden">
-                  <div className="absolute inset-0 bg-[#00E5FF]/0 group-hover:bg-[#00E5FF]/10 transition-all duration-300 rounded-full" />
-
-                  <div className="relative z-10 flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#00E5FF]/20 to-[#00B8D4]/20 group-hover:from-[#00E5FF]/30 group-hover:to-[#00B8D4]/30 transition-all duration-300">
-                    <Icon
-                      className="w-5 h-5 text-[#00E5FF] drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]"
-                      strokeWidth={2.5}
-                    />
+                <div className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 hover:border-[#00E5FF]/30 transition-all duration-300">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#00E5FF]/10 text-[#00E5FF]">
+                    <Icon className="w-4 h-4" />
                   </div>
-
-                  <span className="relative z-10 text-sm md:text-base font-semibold text-white/80 group-hover:text-white transition-colors duration-300">
+                  <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                     {badge.label}
                   </span>
                 </div>

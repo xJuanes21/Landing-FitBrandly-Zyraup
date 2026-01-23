@@ -116,7 +116,7 @@ export default function TermsAndConditions() {
           </div>
 
           {/* Sections */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             {sections.map((section, index) => {
               const Icon = section.icon;
               const isExpanded = expandedSection === section.id;
@@ -131,7 +131,7 @@ export default function TermsAndConditions() {
                 >
                   <button
                     onClick={() => toggleSection(section.id)}
-                    className="w-full p-6 flex items-center justify-between text-left transition-all duration-300 hover:bg-white/5"
+                    className="w-full p-8 flex items-center justify-between text-left transition-all duration-300 hover:bg-white/5"
                   >
                     <div className="flex items-center gap-4 flex-1">
                       <div className="w-12 h-12 rounded-xl glass-liquid flex items-center justify-center flex-shrink-0 bg-white/5 border border-white/10">
@@ -160,7 +160,7 @@ export default function TermsAndConditions() {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 pt-2">
+                        <div className="px-8 pb-8 pt-2">
                           <div className="pl-16">
                             <p className="text-gray-300 leading-relaxed">
                               {section.content}

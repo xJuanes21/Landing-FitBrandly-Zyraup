@@ -156,7 +156,7 @@ export default function PrivacyPolicy() {
           </div>
 
           {/* Sections */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             {sections.map((section, index) => {
               const Icon = section.icon;
               const isExpanded = expandedSection === section.id;
@@ -175,7 +175,7 @@ export default function PrivacyPolicy() {
                 >
                   <button
                     onClick={() => toggleSection(section.id)}
-                    className="w-full p-6 flex items-center justify-between text-left transition-all duration-300 hover:bg-white/5"
+                    className="w-full p-8 flex items-center justify-between text-left transition-all duration-300 hover:bg-white/5"
                   >
                     <div className="flex items-center gap-4 flex-1">
                       <div
@@ -215,7 +215,7 @@ export default function PrivacyPolicy() {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 pt-2">
+                        <div className="px-8 pb-8 pt-2">
                           <div className="pl-16">
                             <p className="text-gray-300 leading-relaxed">
                               {section.content}
@@ -235,7 +235,7 @@ export default function PrivacyPolicy() {
             <h3 className="text-2xl font-bold text-white mb-8 text-center">
               Tus Derechos <span className="gradient-text">(ARCO)</span>
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {rights.map((right, index) => {
                 const Icon = right.icon;
                 return (
@@ -244,7 +244,7 @@ export default function PrivacyPolicy() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
-                    className="glass-liquid rounded-xl p-6 text-center hover:border-[#00E5FF]/30 transition-all duration-300 border border-white/5 bg-white/5"
+                    className="glass-liquid rounded-xl p-8 text-center hover:border-[#00E5FF]/30 transition-all duration-300 border border-white/5 bg-white/5"
                   >
                     <div className="w-14 h-14 rounded-full glass-liquid flex items-center justify-center mx-auto mb-4 bg-white/5">
                       <Icon className="w-7 h-7 text-[#00E5FF]" />

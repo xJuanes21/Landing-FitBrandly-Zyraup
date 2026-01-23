@@ -70,7 +70,7 @@ export default function PricingSection() {
   };
 
   return (
-    <section id="pricing" className="py-24 md:py-40 relative overflow-hidden">
+    <section id="pricing" className=" relative overflow-hidden">
       <div className="relative z-10 container-custom">
         {/* Background gradient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-radial from-[#00E5FF]/10 via-[#00E5FF]/5 to-transparent blur-3xl pointer-events-none" />
@@ -136,7 +136,7 @@ export default function PricingSection() {
                   />
 
                   {/* Badge superior */}
-                  <div className="relative pt-6 pb-4 text-center border-b border-white/5">
+                  <div className="relative pt-8 pb-6 text-center border-b border-white/5">
                     <span
                       className={`inline-block px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest ${
                         plan.featured
@@ -149,7 +149,7 @@ export default function PricingSection() {
                   </div>
 
                   {/* Content */}
-                  <div className="relative p-8 space-y-8 flex-1 flex flex-col">
+                  <div className="relative p-10 lg:p-12 space-y-10 flex-1 flex flex-col">
                     {/* Plan name */}
                     <div className="text-center">
                       <h3
@@ -180,7 +180,7 @@ export default function PricingSection() {
                     </div>
 
                     {/* Features */}
-                    <ul className="space-y-4 flex-1">
+                    <ul className="space-y-6 flex-1">
                       {plan.features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-4">
                           <div
@@ -205,11 +205,11 @@ export default function PricingSection() {
                     </ul>
 
                     {/* CTA Button */}
-                    <div className="pt-4">
+                    <div className="pt-6">
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`w-full py-4 rounded-xl font-semibold text-base transition-all duration-300 ${
+                        className={`w-full py-5 rounded-xl font-semibold text-base transition-all duration-300 ${
                           plan.featured
                             ? "bg-gradient-to-r from-[#00E5FF] to-[#00B8D4] text-black shadow-lg shadow-[#00E5FF]/30 hover:shadow-[#00E5FF]/50"
                             : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20"
