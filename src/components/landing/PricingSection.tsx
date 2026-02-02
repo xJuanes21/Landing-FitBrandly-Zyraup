@@ -16,15 +16,15 @@ import MobileCarousel from "@/components/ui/MobileCarousel";
 const pricingPlans: PricingPlan[] = [
   {
     id: "basic",
-    name: "Basic",
-    price: 50000,
+    name: "Básico",
+    price: 100000,
     currency: "COP",
     period: "/mes",
-    description: "Ideal para comenzar",
+    description: "Lo mínimo para empezar",
     features: [
       "Hasta 10 usuarios",
+      "Módulo de Ejercicios",
       "App personalizada",
-      "Nutrición personalizada",
       "Soporte email",
     ],
     badge: "IDEAL PARA INICIAR",
@@ -32,13 +32,14 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "standard",
     name: "Standard",
-    price: 70000,
+    price: 160000,
     currency: "COP",
     period: "/mes",
     description: "Lo más popular",
     features: [
-      "Hasta 18 usuarios",
-      "Nutrición personalizada",
+      "Hasta 20 usuarios",
+      "Módulo de Ejercicios",
+      "Módulo de Alimentación",
       "Soporte integrado",
       "Mensajería integrada",
     ],
@@ -48,15 +49,16 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "advance",
     name: "Advance",
-    price: 120000,
+    price: 250000,
     currency: "COP",
     period: "/mes",
-    description: "Máximo poder",
+    description: "Máximo poder para tu marca",
     features: [
-      "Hasta 30 usuarios",
-      "Nutrición personalizada",
-      "Soporte integrado",
-      "Mensajería integrada",
+      "Hasta 25 usuarios",
+      "Módulo de Ejercicios",
+      "Módulo de Alimentación",
+      "Chat privado",
+      "Calendario de actividades",
     ],
     badge: "SIN LÍMITES",
   },
@@ -71,7 +73,7 @@ export default function PricingSection() {
   };
 
   return (
-    <section id="pricing" className=" relative overflow-hidden pt-6">
+    <section id="precios" className="relative overflow-hidden py-24 md:py-32">
       <div className="relative z-10 container-custom">
         {/* Background gradient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-radial from-[#00E5FF]/10 via-[#00E5FF]/5 to-transparent blur-3xl pointer-events-none" />
@@ -93,6 +95,7 @@ export default function PricingSection() {
               ajuste a tus necesidades.
             </p>
           </motion.div>
+
           {/* Pricing Cards Grid */}
           <MobileCarousel className="grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {pricingPlans.map((plan) => (
@@ -105,32 +108,61 @@ export default function PricingSection() {
                 }}
                 className="relative group h-full"
               >
-                {/* Glow effect solo para featured */}
-                {plan.featured && (
-                  <>
-                    <div className="absolute -inset-[2px] bg-gradient-to-b from-[#00E5FF] via-[#00B8D4] to-[#0088A0] rounded-[28px] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute -inset-[1px] bg-gradient-to-b from-[#00E5FF] via-[#00B8D4] to-[#0088A0] rounded-[26px] opacity-80" />
-                  </>
+                {/* Outer glow */}
+                {plan.featured ? (
+                  // Glow CYAN para el destacado
+                  <div className="absolute inset-0 bg-[#00E5FF]/40 rounded-[28px] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
+                ) : (
+                  // Glow blanco sutil para los demás
+                  <div className="absolute inset-0 bg-white/10 rounded-[28px] blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-700" />
                 )}
 
-                {/* Card principal */}
+                {/* Card principal con borde neon */}
                 <div
-                  className={`relative rounded-3xl overflow-hidden h-full flex flex-col ${
+                  className={`relative h-full rounded-[28px] overflow-hidden flex flex-col ${
                     plan.featured
-                      ? "bg-gradient-to-b from-[#1a3a42] via-[#0f2832] to-[#0a1f28]"
+                      ? "bg-gradient-to-b from-[#051a20] via-[#082530] to-[#041519]"
                       : "bg-gradient-to-b from-[#1a1a1a] via-[#151515] to-[#0f0f0f]"
-                  } backdrop-blur-xl border ${
-                    plan.featured ? "border-[#00E5FF]/30" : "border-white/10"
-                  } shadow-2xl`}
+                  } backdrop-blur-xl`}
+                  style={
+                    plan.featured
+                      ? {
+                          boxShadow: `
+                            0 0 0 2px rgba(0, 229, 255, 0.9),
+                            0 0 25px rgba(0, 229, 255, 0.7),
+                            0 0 50px rgba(0, 229, 255, 0.4),
+                            inset 0 0 70px rgba(0, 229, 255, 0.25),
+                            inset 0 0 40px rgba(0, 229, 255, 0.2)
+                          `,
+                        }
+                      : {
+                          boxShadow: `
+                            0 0 0 1px rgba(255, 255, 255, 0.15),
+                            0 0 15px rgba(255, 255, 255, 0.1),
+                            0 0 30px rgba(255, 255, 255, 0.05),
+                            inset 0 0 40px rgba(255, 255, 255, 0.03)
+                          `,
+                        }
+                  }
                 >
-                  {/* Subtle inner glow */}
-                  <div
-                    className={`absolute inset-0 ${
-                      plan.featured
-                        ? "bg-gradient-to-b from-[#00E5FF]/5 to-transparent"
-                        : "bg-gradient-to-b from-white/[0.02] to-transparent"
-                    } pointer-events-none`}
-                  />
+                  {/* Difuminado interno en los bordes */}
+                  {plan.featured ? (
+                    // Difuminado CYAN para el destacado
+                    <div className="absolute inset-0 rounded-[28px] pointer-events-none">
+                      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
+                      <div className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
+                      <div className="absolute top-0 left-0 bottom-0 w-24 bg-gradient-to-r from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
+                    </div>
+                  ) : (
+                    // Difuminado blanco sutil para los demás
+                    <div className="absolute inset-0 rounded-[28px] pointer-events-none">
+                      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/8 via-white/4 to-transparent" />
+                      <div className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-white/8 via-white/4 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/8 via-white/4 to-transparent" />
+                      <div className="absolute top-0 left-0 bottom-0 w-24 bg-gradient-to-r from-white/8 via-white/4 to-transparent" />
+                    </div>
+                  )}
 
                   {/* Badge superior */}
                   <div className="relative pt-8 pb-6 text-center border-b border-white/5">
@@ -219,18 +251,18 @@ export default function PricingSection() {
 
                   {/* Shimmer effect on hover */}
                   <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    className="absolute inset-0 rounded-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                     style={{
                       background: plan.featured
-                        ? "linear-gradient(110deg, transparent 30%, rgba(0,229,255,0.1) 50%, transparent 70%)"
-                        : "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%)",
+                        ? "linear-gradient(110deg, transparent 30%, rgba(0,229,255,0.2) 50%, transparent 70%)"
+                        : "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%)",
                       backgroundSize: "200% 100%",
                     }}
                     animate={{
                       backgroundPosition: ["200% 0", "-200% 0"],
                     }}
                     transition={{
-                      duration: 2,
+                      duration: 2.5,
                       repeat: Infinity,
                       ease: "linear",
                     }}
@@ -239,14 +271,33 @@ export default function PricingSection() {
               </motion.div>
             ))}
           </MobileCarousel>
-          {/* Guarantee text */}
-          <motion.p
-            variants={fadeInUp}
-            className="text-center text-white/40 text-sm font-medium"
-          >
-            ✓ 14 días gratis &nbsp;•&nbsp; ✓ Sin tarjeta de crédito
-            &nbsp;•&nbsp; ✓ Cancela cuando quieras
-          </motion.p>
+
+          {/* Guarantee text & Custom Plan */}
+          <motion.div variants={fadeInUp} className="space-y-8 text-center">
+            <p className="text-white/40 text-sm font-medium pt-8">
+              ✓ 14 días gratis &nbsp;•&nbsp; ✓ Sin tarjeta de crédito
+              &nbsp;•&nbsp; ✓ Cancela cuando quieras
+            </p>
+
+            <div className="pt-4">
+              <Button
+                variant="ghost"
+                size="lg"
+                className="glow-text tracking-wider text-sm uppercase rounded-full border-[#00E5FF]/30 text-[#00E5FF] hover:bg-[#00E5FF]/10 transition-all duration-300"
+                onClick={() => {
+                  const whatsappLink =
+                    process.env.NEXT_PUBLIC_WHATSAPP_LINK ||
+                    "https://wa.me/573013488759";
+                  window.open(
+                    `${whatsappLink}?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20un%20plan%20personalizado`,
+                    "_blank",
+                  );
+                }}
+              >
+                ¿Necesitas un plan a tu medida? Contáctanos
+              </Button>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

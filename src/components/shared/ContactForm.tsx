@@ -40,6 +40,8 @@ interface InputField {
 
 type LucideIcon = typeof User;
 
+import { FloatingInput, FloatingTextArea } from "../ui/FloatingInput";
+
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -84,12 +86,10 @@ export default function ContactForm() {
 
     if (!formData.whatsapp.trim()) {
       newErrors.whatsapp = "WhatsApp es requerido";
-    } else if (!/^\+?[\d\s-]+$/.test(formData.whatsapp)) {
-      newErrors.whatsapp = "Número inválido";
     }
 
     if (!formData.company.trim()) {
-      newErrors.company = "Nombre del gym/empresa es requerido";
+      newErrors.company = "Nombre del gym es requerido";
     }
 
     if (!formData.message.trim()) {
@@ -100,7 +100,7 @@ export default function ContactForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!validateForm()) {
@@ -109,7 +109,20 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          formType: "contact",
+        }),
+      });
+
+      if (!response.ok) throw new Error("Error al enviar el mensaje");
+
       setIsSubmitting(false);
       setIsSuccess(true);
       setFormData({
@@ -123,42 +136,49 @@ export default function ContactForm() {
       setTimeout(() => {
         setIsSuccess(false);
       }, 5000);
-    }, 2000);
+    } catch (error) {
+      console.error("Submission error:", error);
+      setIsSubmitting(false);
+      alert("Hubo un error al enviar el mensaje. Por favor intenta de nuevo.");
+    }
   };
 
   const inputFields: InputField[] = [
     {
       name: "name",
-      label: "Nombre Completo",
+      label: "Tu Nombre",
       type: "text",
-      placeholder: "Juan Pérez",
+      placeholder: "Ej: Juan Pérez",
       icon: User,
     },
     {
       name: "email",
       label: "Correo Electrónico",
       type: "email",
-      placeholder: "juan@ejemplo.com",
+      placeholder: "Ej: juan@gym.com",
       icon: Mail,
     },
     {
       name: "whatsapp",
-      label: "WhatsApp",
+      label: "WhatsApp de Contacto",
       type: "tel",
-      placeholder: "+57 300 123 4567",
+      placeholder: "+57 300 000 0000",
       icon: Phone,
     },
     {
       name: "company",
-      label: "Nombre del Gym / Empresa",
+      label: "Nombre de tu Gimnasio",
       type: "text",
-      placeholder: "FitGym Pro",
+      placeholder: "Escribe el nombre aquí",
       icon: Building2,
     },
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-[#0A0A0A] py-32 px-4">
+    <div
+      id="contacto"
+      className="min-h-screen relative overflow-hidden bg-[#0A0A0A] py-32 px-4"
+    >
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#00E5FF]/5 rounded-full blur-[200px] pointer-events-none" />
 
@@ -171,169 +191,116 @@ export default function ContactForm() {
         >
           <Particles />
 
-          <h1 className="text-4xl font-bold gradient-text glow-text mb-6 tracking-[0.2em] uppercase">
+          <h1 className="text-4xl md:text-7xl font-extrabold glow-text mb-6 tracking-widest uppercase">
             Contáctanos
           </h1>
-          <p className="text-2xl font-semibold text-gray-300 max-w-3xl mx-auto uppercase">
-            Transforma tu negocio fitness con tu propia plataforma de marca
-            blanca
+          <p className="text-xl md:text-2xl font-bold gradient-text max-w-3xl mx-auto uppercase">
+            Eleva tu marca personal al siguiente nivel
           </p>
         </motion.div>
 
-        {/* Form Section - Más ancho */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="max-w-4xl mx-auto glass-liquid rounded-3xl p-10 lg:p-16"
-        >
-          <div className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              {inputFields.map((field: InputField, index: number) => {
-                const Icon = field.icon;
-                return (
-                  <motion.div
-                    key={field.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                  >
-                    <label className="block text-[#00e5ff] font-semibold mb-3 text-lg">
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      name={field.name}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                      placeholder={field.placeholder}
-                      className={`w-full px-6 py-4 rounded-xl glass text-white placeholder:text-gray-500 
-                        focus:outline-none focus:border-[#00e5ff] focus:glow-sm transition-all duration-300 text-lg
-                        ${errors[field.name] ? "border-2 border-red-500" : "border border-white/10"}`}
-                    />
-                    {errors[field.name] && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-red-400 text-sm mt-2 ml-1"
-                      >
-                        {errors[field.name]}
-                      </motion.p>
-                    )}
-                  </motion.div>
-                );
-              })}
+        {/* Form Section */}
+        <div className="max-w-4xl mx-auto glass-liquid rounded-3xl p-8 md:p-16 border border-white/5 relative overflow-hidden">
+          {/* Decorative glows */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#00e5ff]/5 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#3b82f6]/5 blur-[100px] pointer-events-none" />
+
+          <div className="space-y-12 relative z-10">
+            <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
+              {inputFields.map((field, index) => (
+                <motion.div
+                  key={field.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  viewport={{ once: true }}
+                >
+                  <FloatingInput
+                    id={field.name}
+                    name={field.name}
+                    label={field.label}
+                    type={field.type}
+                    icon={field.icon}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    error={errors[field.name]}
+                  />
+                </motion.div>
+              ))}
             </div>
 
-            {/* Message Field - Full width */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              viewport={{ once: true }}
             >
-              <label className="block text-[#00e5ff] font-semibold mb-3 text-lg">
-                Mensaje
-              </label>
-              <textarea
+              <FloatingTextArea
+                id="message"
                 name="message"
+                label="¿En qué podemos ayudarte?"
+                icon={MessageSquare}
+                rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Cuéntanos sobre tu gym y qué te gustaría lograr..."
-                rows={6}
-                className={`w-full px-6 py-4 rounded-xl glass text-white placeholder:text-gray-500 
-                  focus:outline-none focus:border-[#00e5ff] focus:glow-sm transition-all duration-300 resize-none text-lg
-                  ${errors.message ? "border-2 border-red-500" : "border border-white/10"}`}
+                error={errors.message}
               />
-              {errors.message && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-red-400 text-sm mt-2 ml-1"
-                >
-                  {errors.message}
-                </motion.p>
-              )}
             </motion.div>
 
-            {/* Info Box */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1 }}
-              className="p-6 rounded-2xl border-2 border-[#00e5ff]/30 bg-[#00e5ff]/5"
-            >
-              <p className="text-gray-300 text-center leading-relaxed">
-                <span className="text-[#00e5ff] font-bold text-lg">
-                  ⚡ Respuesta en menos de 24 horas
-                </span>
-                <br />
-                Te contactaremos vía WhatsApp con toda la información
-              </p>
-            </motion.div>
-
-            {/* Submit Button */}
             <motion.button
               onClick={handleSubmit}
               disabled={isSubmitting || isSuccess}
               whileHover={{ scale: isSubmitting || isSuccess ? 1 : 1.02 }}
               whileTap={{ scale: isSubmitting || isSuccess ? 1 : 0.98 }}
-              className={`w-full btn-primary py-5 text-xl ${
-                (isSubmitting || isSuccess) && "opacity-80 cursor-not-allowed"
-              }`}
+              className={`w-full relative group py-5 px-8 rounded-2xl font-bold text-xl overflow-hidden transition-all duration-300
+                ${isSuccess ? "bg-green-500/20 text-green-400 border border-green-500/50" : "text-white"}
+                ${isSubmitting && "opacity-80 cursor-not-allowed"}
+              `}
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="w-6 h-6 animate-spin" />
-                  Enviando...
-                </>
-              ) : isSuccess ? (
-                <>
-                  <CheckCircle className="w-6 h-6" />
-                  ¡Mensaje Enviado!
-                </>
-              ) : (
-                <>
-                  <Send className="w-6 h-6" />
-                  Enviar Mensaje
-                </>
+              {/* Button Gradient / Background */}
+              {!isSuccess && (
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00e5ff] to-[#3b82f6] opacity-90 group-hover:opacity-100 transition-opacity" />
               )}
+
+              <div className="relative flex items-center justify-center gap-3">
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-6 h-6 animate-spin" />
+                    <span>Enviando...</span>
+                  </>
+                ) : isSuccess ? (
+                  <>
+                    <CheckCircle className="w-6 h-6" />
+                    <span>¡Enviado con éxito!</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <span className="uppercase tracking-widest">
+                      Enviar Solicitud
+                    </span>
+                  </>
+                )}
+              </div>
             </motion.button>
           </div>
+        </div>
 
-          {/* Success Message */}
-          {isSuccess && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mt-8 p-6 rounded-2xl bg-[#00e5ff]/10 border-2 border-[#00e5ff]/50 glow-md"
-            >
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-7 h-7 text-[#00e5ff] flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-white font-bold text-xl mb-2">
-                    ¡Gracias por contactarnos!
-                  </p>
-                  <p className="text-gray-300 text-lg">
-                    Te responderemos por WhatsApp en las próximas 24 horas.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Additional Info */}
+        {/* Footer Info */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
-          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-center mt-16 space-y-4"
         >
-          <p className="text-gray-400 text-lg">
-            También puedes escribirnos directamente a{" "}
+          <div className="flex items-center justify-center gap-2 text-white/40">
+            <Zap className="w-4 h-4 text-[#00e5ff]" />
+            <p>Atención prioritaria para nuevos registros</p>
+          </div>
+          <p className="text-white/20">
+            O si prefieres:{" "}
             <a
-              href="mailto:fitbrandly@gmail.com"
-              className="text-[#00e5ff] hover:underline font-semibold glow-text"
+              href="mailto:hola@fitbrandly.com"
+              className="text-[#00e5ff]/60 hover:text-[#00e5ff] transition-colors"
             >
               fitbrandly@gmail.com
             </a>

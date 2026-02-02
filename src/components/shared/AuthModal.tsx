@@ -26,17 +26,18 @@ export default function AuthModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-          onClick={onClose}
-        >
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="glass-liquid rounded-3xl p-6 md:p-8 max-w-2xl w-full border border-white/20 bg-[#0A0A0A] max-h-[90vh] overflow-y-auto mx-4 relative"
             onClick={(e) => e.stopPropagation()}
           >
@@ -137,7 +138,7 @@ export default function AuthModal({
               Sin esta autorización no podemos procesar tu registro
             </p>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );

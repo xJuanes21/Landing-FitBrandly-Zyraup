@@ -44,7 +44,10 @@ const problemSolutions = [
 
 export default function ProblemSolutionSection() {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-[#0A0A0A] flex justify-center">
+    <section
+      id="problema-solucion"
+      className="py-32 md:py-40 relative overflow-hidden bg-[#0A0A0A] flex justify-center"
+    >
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#00E5FF]/5 rounded-full blur-[200px] pointer-events-none" />
 
@@ -54,7 +57,7 @@ export default function ProblemSolutionSection() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="space-y-16"
+          className="space-y-20 md:space-y-24"
         >
           <motion.div variants={fadeInUp} className="text-center space-y-4">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight">
@@ -80,59 +83,68 @@ export default function ProblemSolutionSection() {
                   <motion.div
                     whileHover={{ y: -6 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="group relative"
+                    className="group relative h-[240px]"
                   >
-                    {/* Intense outer glow */}
-                    <div className="absolute -inset-1 bg-gradient-to-b from-red-500/40 via-red-600/30 to-red-700/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Outer glow - suave y difuso */}
+                    <div className="absolute inset-0 bg-red-500/30 rounded-[28px] blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-700" />
 
-                    {/* Extra glow layer */}
-                    <div className="absolute -inset-2 bg-red-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
+                    {/* Card principal con borde neon ÚNICO */}
+                    <div
+                      className="relative h-full rounded-[28px] bg-gradient-to-b from-[#1a0505] via-[#200808] to-[#150404] p-8 overflow-hidden"
+                      style={{
+                        boxShadow: `
+                          0 0 0 2px rgba(239, 68, 68, 0.8),
+                          0 0 20px rgba(239, 68, 68, 0.6),
+                          0 0 40px rgba(239, 68, 68, 0.3),
+                          inset 0 0 60px rgba(239, 68, 68, 0.2),
+                          inset 0 0 30px rgba(239, 68, 68, 0.15)
+                        `,
+                      }}
+                    >
+                      {/* Difuminado interno en los bordes - efecto de luz interior */}
+                      <div className="absolute inset-0 rounded-[28px] pointer-events-none">
+                        {/* Top glow interno */}
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-red-500/20 via-red-500/10 to-transparent" />
 
-                    <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#1a0505] via-[#200808] to-[#150404] backdrop-blur-xl border-2 border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.3)] group-hover:shadow-[0_0_50px_rgba(239,68,68,0.6)] transition-all duration-500">
-                      {/* Enhanced Corner glows - Top Left */}
-                      <div className="absolute top-0 left-0 w-32 h-32">
-                        <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-red-500 via-red-400 to-transparent shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-                        <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-red-500 via-red-400 to-transparent shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-                        <div className="absolute top-0 left-0 w-16 h-16 bg-red-500/50 blur-2xl rounded-full animate-pulse" />
+                        {/* Right glow interno */}
+                        <div className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-red-500/20 via-red-500/10 to-transparent" />
+
+                        {/* Bottom glow interno */}
+                        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-red-500/20 via-red-500/10 to-transparent" />
+
+                        {/* Left glow interno */}
+                        <div className="absolute top-0 left-0 bottom-0 w-24 bg-gradient-to-r from-red-500/20 via-red-500/10 to-transparent" />
                       </div>
 
-                      {/* Enhanced Corner glows - Bottom Right */}
-                      <div className="absolute bottom-0 right-0 w-32 h-32">
-                        <div className="absolute bottom-0 right-0 w-full h-[3px] bg-gradient-to-l from-red-500 via-red-400 to-transparent shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-                        <div className="absolute bottom-0 right-0 w-[3px] h-full bg-gradient-to-t from-red-500 via-red-400 to-transparent shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
-                        <div className="absolute bottom-0 right-0 w-16 h-16 bg-red-500/50 blur-2xl rounded-full animate-pulse" />
-                      </div>
-
-                      <div className="absolute inset-0 bg-gradient-to-b from-red-500/10 to-transparent pointer-events-none" />
-
-                      <div className="relative p-8 min-h-[200px] flex flex-col items-center justify-center text-center space-y-4">
-                        {/* Enhanced icon with multiple glow layers */}
+                      {/* Content */}
+                      <div className="relative h-full flex flex-col items-center justify-center text-center space-y-4">
+                        {/* Icon with glow */}
                         <div className="relative p-4 rounded-2xl">
                           <div className="absolute inset-0 bg-red-500/20 blur-xl rounded-2xl" />
                           <ProblemIcon
-                            className="relative w-12 h-12 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.9)] filter brightness-125"
+                            className="relative w-12 h-12 text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.9)]"
                             strokeWidth={2}
                           />
                         </div>
 
-                        <p className="text-white/95 font-medium text-base md:text-lg leading-relaxed drop-shadow-lg">
+                        <p className="text-white/95 font-medium text-base md:text-lg leading-relaxed">
                           {item.problem}
                         </p>
                       </div>
 
-                      {/* Enhanced shine effect */}
+                      {/* Shine effect on hover */}
                       <motion.div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                        className="absolute inset-0 rounded-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                         style={{
                           background:
-                            "linear-gradient(110deg, transparent 25%, rgba(239, 68, 68, 0.3) 50%, transparent 75%)",
+                            "linear-gradient(110deg, transparent 30%, rgba(239, 68, 68, 0.15) 50%, transparent 70%)",
                           backgroundSize: "200% 100%",
                         }}
                         animate={{
                           backgroundPosition: ["200% 0", "-200% 0"],
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 2.5,
                           repeat: Infinity,
                           ease: "linear",
                         }}
@@ -140,7 +152,7 @@ export default function ProblemSolutionSection() {
                     </div>
                   </motion.div>
 
-                  {/* Enhanced Arrow - White Neon */}
+                  {/* Arrow - White Neon */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -158,7 +170,6 @@ export default function ProblemSolutionSection() {
                       }}
                       className="relative"
                     >
-                      {/* Multiple glow layers for intense effect */}
                       <div className="absolute inset-0 blur-xl bg-white/60 rounded-full scale-150" />
                       <div className="absolute inset-0 blur-2xl bg-white/40 rounded-full scale-200" />
 
@@ -182,59 +193,68 @@ export default function ProblemSolutionSection() {
                   <motion.div
                     whileHover={{ y: -6 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="group relative"
+                    className="group relative h-[240px]"
                   >
-                    {/* Intense outer glow */}
-                    <div className="absolute -inset-1 bg-gradient-to-b from-[#00E5FF]/50 via-[#00B8D4]/40 to-[#0088A0]/30 rounded-3xl blur-xl opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Outer glow - suave y difuso */}
+                    <div className="absolute inset-0 bg-[#00E5FF]/40 rounded-[28px] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
 
-                    {/* Extra glow layer */}
-                    <div className="absolute -inset-2 bg-[#00E5FF]/30 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+                    {/* Card principal con borde neon ÚNICO */}
+                    <div
+                      className="relative h-full rounded-[28px] bg-gradient-to-b from-[#051a20] via-[#082530] to-[#041519] p-8 overflow-hidden"
+                      style={{
+                        boxShadow: `
+                          0 0 0 2px rgba(0, 229, 255, 0.9),
+                          0 0 25px rgba(0, 229, 255, 0.7),
+                          0 0 50px rgba(0, 229, 255, 0.4),
+                          inset 0 0 70px rgba(0, 229, 255, 0.25),
+                          inset 0 0 40px rgba(0, 229, 255, 0.2)
+                        `,
+                      }}
+                    >
+                      {/* Difuminado interno en los bordes - efecto de luz interior CYAN */}
+                      <div className="absolute inset-0 rounded-[28px] pointer-events-none">
+                        {/* Top glow interno */}
+                        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
 
-                    <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#051a20] via-[#082530] to-[#041519] backdrop-blur-xl border-2 border-[#00E5FF]/40 shadow-[0_0_40px_rgba(0,229,255,0.4)] group-hover:shadow-[0_0_60px_rgba(0,229,255,0.7)] transition-all duration-500">
-                      {/* Enhanced Corner glows - Top Left */}
-                      <div className="absolute top-0 left-0 w-32 h-32">
-                        <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#00E5FF] via-[#00B8D4] to-transparent shadow-[0_0_20px_rgba(0,229,255,1)]" />
-                        <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-[#00E5FF] via-[#00B8D4] to-transparent shadow-[0_0_20px_rgba(0,229,255,1)]" />
-                        <div className="absolute top-0 left-0 w-16 h-16 bg-[#00E5FF]/60 blur-2xl rounded-full animate-pulse" />
+                        {/* Right glow interno */}
+                        <div className="absolute top-0 right-0 bottom-0 w-24 bg-gradient-to-l from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
+
+                        {/* Bottom glow interno */}
+                        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
+
+                        {/* Left glow interno */}
+                        <div className="absolute top-0 left-0 bottom-0 w-24 bg-gradient-to-r from-[#00E5FF]/25 via-[#00E5FF]/12 to-transparent" />
                       </div>
 
-                      {/* Enhanced Corner glows - Bottom Right */}
-                      <div className="absolute bottom-0 right-0 w-32 h-32">
-                        <div className="absolute bottom-0 right-0 w-full h-[3px] bg-gradient-to-l from-[#00E5FF] via-[#00B8D4] to-transparent shadow-[0_0_20px_rgba(0,229,255,1)]" />
-                        <div className="absolute bottom-0 right-0 w-[3px] h-full bg-gradient-to-t from-[#00E5FF] via-[#00B8D4] to-transparent shadow-[0_0_20px_rgba(0,229,255,1)]" />
-                        <div className="absolute bottom-0 right-0 w-16 h-16 bg-[#00E5FF]/60 blur-2xl rounded-full animate-pulse" />
-                      </div>
-
-                      <div className="absolute inset-0 bg-gradient-to-b from-[#00E5FF]/15 to-transparent pointer-events-none" />
-
-                      <div className="relative p-8 min-h-[200px] flex flex-col items-center justify-center text-center space-y-4">
-                        {/* Enhanced icon with multiple glow layers */}
+                      {/* Content */}
+                      <div className="relative h-full flex flex-col items-center justify-center text-center space-y-4">
+                        {/* Icon with glow */}
                         <div className="relative p-4 rounded-2xl">
                           <div className="absolute inset-0 bg-[#00E5FF]/30 blur-xl rounded-2xl" />
                           <SolutionIcon
-                            className="relative w-12 h-12 text-[#00E5FF] drop-shadow-[0_0_20px_rgba(0,229,255,1)] filter brightness-125"
+                            className="relative w-12 h-12 text-[#00E5FF] drop-shadow-[0_0_25px_rgba(0,229,255,1)]"
                             strokeWidth={2}
                           />
                         </div>
 
-                        <p className="text-white font-semibold text-base md:text-lg leading-relaxed drop-shadow-lg">
+                        <p className="text-white font-semibold text-base md:text-lg leading-relaxed">
                           {item.solution}
                         </p>
                       </div>
 
-                      {/* Enhanced shine effect */}
+                      {/* Shine effect on hover */}
                       <motion.div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                        className="absolute inset-0 rounded-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                         style={{
                           background:
-                            "linear-gradient(110deg, transparent 25%, rgba(0, 229, 255, 0.35) 50%, transparent 75%)",
+                            "linear-gradient(110deg, transparent 30%, rgba(0, 229, 255, 0.2) 50%, transparent 70%)",
                           backgroundSize: "200% 100%",
                         }}
                         animate={{
                           backgroundPosition: ["200% 0", "-200% 0"],
                         }}
                         transition={{
-                          duration: 2,
+                          duration: 2.5,
                           repeat: Infinity,
                           ease: "linear",
                         }}
@@ -245,6 +265,31 @@ export default function ProblemSolutionSection() {
               );
             })}
           </MobileCarousel>
+
+          {/* New CTA Button */}
+          <motion.div
+            variants={fadeInUp}
+            className="flex flex-col items-center pt-22"
+          >
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative group px-10 py-5 rounded-full font-black text-lg tracking-widest uppercase overflow-hidden"
+              style={{
+                boxShadow: `
+                  0 0 0 2px rgba(0, 229, 255, 0.4),
+                  0 0 20px rgba(0, 229, 255, 0.2)
+                `,
+              }}
+            >
+              <div className="absolute inset-0 bg-[#00E5FF]/10 group-hover:bg-[#00E5FF]/20 transition-colors" />
+              <span className="relative z-10 text-[#00E5FF] group-hover:text-white transition-colors duration-300">
+                ¿Necesitas algo más? Contáctanos
+              </span>
+              <div className="absolute inset-x-0 bottom-0 h-1 bg-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,1)] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -1,33 +1,38 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { fadeInUp, staggerContainer, viewportSettings } from "@/lib/animations";
 import { Button } from "../ui/Button";
 import CountDown from "../ui/CountDown";
+import SubscribeModal from "../shared/SubscribeModal";
 
 export default function FinalCTASection() {
-  // Countdown target: 30 days from now
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 30);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Countdown target: February 15, 2026
+  const targetDate = new Date("2026-02-15T00:00:00");
 
   return (
-    <section id="contact" className="py-20 md:py-32 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 animated-gradient-bg opacity-50" />
-      <div className="absolute inset-0 grid-pattern opacity-20" />
+    <section
+      id="contact"
+      className="py-24 md:py-40 relative overflow-hidden bg-[#0A0A0A]"
+    >
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0ea5e9]/5 to-transparent opacity-30" />
+      <div className="absolute inset-0 grid-pattern opacity-10" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Glow Effects */}
+        {/* Central Glow */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00E5FF] rounded-full filter blur-[200px] opacity-10"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0ea5e9] rounded-full filter blur-[180px] opacity-5 pointer-events-none"
           animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.1, 0.15, 0.1],
+            scale: [1, 1.1, 1],
+            opacity: [0.05, 0.08, 0.05],
           }}
           transition={{
-            duration: 5,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
           }}
@@ -38,67 +43,62 @@ export default function FinalCTASection() {
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="relative z-10 text-center space-y-8"
+          className="relative z-10 text-center space-y-12"
         >
-          {/* Badge */}
-          <motion.div variants={fadeInUp} className="inline-block"></motion.div>
-
           {/* Headline */}
-          <motion.h2
-            variants={fadeInUp}
-            className="heading-xl text-white max-w-3xl mx-auto"
-          >
-            Construye tu{" "}
-            <span className="gradient-text glow-text">imperio fitness</span> HOY
-          </motion.h2>
+          <div className="space-y-6">
+            <motion.h2
+              variants={fadeInUp}
+              className="text-4xl sm:text-5xl md:text-7xl uppercase font-extrabold text-white tracking-tight leading-[1.1]"
+            >
+              Construye tu{" "}
+              <span className="glow-text bg-gradient-to-r from-[#0ea5e9] via-[#06b6d4] to-[#3b82f6] bg-clip-text text-transparent">
+                imperio fitness
+              </span>{" "}
+              HOY
+            </motion.h2>
 
-          {/* Subtext */}
-          <motion.p
-            variants={fadeInUp}
-            className="text-xl text-[#F5F5F5] opacity-80 max-w-xl mx-auto"
-          >
-            Únete a los 500+ entrenadores que ya eligieron la libertad
-          </motion.p>
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg md:text-xl text-[#94a3b8] max-w-xl mx-auto leading-relaxed"
+            >
+              Sé el primero en obtenerlo. Suscríbete ahora para recibir
+              novedades exclusivas y ser parte del lanzamiento oficial.
+            </motion.p>
+          </div>
 
           {/* CTA Button */}
-          <motion.div variants={fadeInUp}>
-            <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 30px rgba(0, 229, 255, 0.5)",
-                  "0 0 60px rgba(0, 229, 255, 0.8)",
-                  "0 0 30px rgba(0, 229, 255, 0.5)",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="inline-block rounded-xl"
-            >
-              <Button variant="primary" size="lg" href="#pricing">
-                Comienza gratis ahora
-                <ArrowRight className="w-5 h-5" />
+          <motion.div variants={fadeInUp} className="flex justify-center">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#0ea5e9] to-[#3b82f6] rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+              <Button
+                variant="primary"
+                size="lg"
+                className="relative py-6 px-8 sm:px-12 text-xl font-bold rounded-2xl"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Acceso Anticipado
+                <ArrowRight className="w-6 h-6" />
               </Button>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Countdown */}
-          <motion.div variants={fadeInUp} className="space-y-4">
-            <p className="text-[#F5F5F5] opacity-60 text-sm">
-              Oferta de lanzamiento termina en:
+          <motion.div variants={fadeInUp} className="pt-8 space-y-6">
+            <p className="text-[#94a3b8] font-medium uppercase tracking-[0.2em] text-sm">
+              Lanzamiento Oficial en:
             </p>
             <div className="flex justify-center">
               <CountDown targetDate={targetDate} />
             </div>
           </motion.div>
-
-          {/* Trust Text */}
-          <motion.p
-            variants={fadeInUp}
-            className="text-[#F5F5F5] opacity-50 text-sm"
-          >
-            Sin tarjeta de crédito • Cancela cuando quieras
-          </motion.p>
         </motion.div>
       </div>
+
+      <SubscribeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

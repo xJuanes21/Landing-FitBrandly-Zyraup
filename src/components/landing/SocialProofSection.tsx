@@ -20,13 +20,13 @@ import {
   viewportSettings,
 } from "@/lib/animations";
 
-const brandLogos = [
-  { id: "1", image: "/icons/icon1.png", alt: "Brand 1" },
-  { id: "2", image: "/icons/icon2.png", alt: "Brand 2" },
-  { id: "3", image: "/icons/icon.png", alt: "Brand 3" },
-  { id: "4", icon: TrendingUp },
-  { id: "5", icon: Shield },
-  { id: "6", icon: Zap },
+const coaches = [
+  { id: "1", image: "/models/fitness-8 copy.jpg", name: "Coach Mike" },
+  { id: "2", image: "/models/fitness-2.png", name: "Coach Sarah" },
+  { id: "3", image: "/models/fitness-3.png", name: "Coach David" },
+  { id: "4", image: "/models/fitness-12.png", name: "Coach Elena" },
+  { id: "5", image: "/models/fitness-5.png", name: "Coach Marc" },
+  { id: "6", image: "/models/fitness-13.jpg", name: "Coach Elena" },
 ];
 
 const trustBadges = [
@@ -43,100 +43,138 @@ export default function SocialProofSection() {
   });
 
   return (
-    <section className="py-20 md:py-24 relative overflow-hidden bg-[#0A0A0A] flex flex-col justify-center">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full blur-[200px] pointer-events-none" />
+    <section className="py-20 md:py-32 relative overflow-hidden bg-[#0A0A0A] flex flex-col justify-center">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#00E5FF]/5 rounded-full blur-[200px] pointer-events-none" />
 
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={viewportSettings}
-        className="relative z-10 container-custom max-w-6xl"
+        className="relative z-10 container-custom max-w-7xl"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
           {/* Left Side: big number text */}
           <motion.div
             variants={fadeInUp}
-            className="lg:col-span-5 space-y-4 text-center lg:text-left"
+            className="lg:col-span-5 space-y-6 text-center lg:text-left"
           >
             <motion.div
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
+              className="relative inline-block"
             >
-              <div className="relative inline-block">
-                <div
-                  ref={ref}
-                  className="text-7xl sm:text-8xl lg:text-[10rem] font-black gradient-text relative z-10 tracking-tighter leading-none filter drop-shadow-[0_0_30px_rgba(0,229,255,0.3)]"
-                >
-                  {formattedCount}
-                </div>
+              <div
+                ref={ref}
+                className="text-8xl sm:text-9xl lg:text-[11rem] font-black gradient-text tracking-tighter leading-none filter drop-shadow-[0_0_50px_rgba(0,229,255,0.4)]"
+              >
+                {formattedCount}
               </div>
+              <div className="absolute -top-4 -right-4 w-12 h-12 bg-[#00E5FF] rounded-full blur-3xl opacity-50" />
             </motion.div>
 
-            <p className="text-xl md:text-2xl lg:text-3xl text-white font-bold leading-tight tracking-tighter uppercase">
-              entrenadores ya
-              <br />
-              <span className="text-gray-400 font-bold tracking-tighter uppercase">
-                construyendo su imperio
-              </span>
-            </p>
+            <div className="space-y-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl text-white font-black leading-none tracking-tighter uppercase italic">
+                Entrenadores que ya están
+                <br />
+                <span className="text-[#00E5FF] drop-shadow-[0_0_10px_#00E5FF]">
+                  construyendo su imperio
+                </span>
+              </h2>
+              <p className="text-gray-400 text-lg font-medium max-w-md mx-auto lg:mx-0">
+                Líderes de la industria confían en FitBrandly para escalar su
+                metodología al siguiente nivel.
+              </p>
+            </div>
           </motion.div>
 
-          {/* Right Side: Grid */}
+          {/* Right Side: Coach Grid */}
           <motion.div
             variants={fadeInUp}
-            className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-4"
+            className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6"
           >
-            {brandLogos.map((brand, index) => {
-              const Icon = brand.icon;
-              return (
-                <motion.div
-                  key={brand.id}
-                  variants={staggerItem}
-                  whileHover={{
-                    y: -5,
-                    transition: { type: "spring", stiffness: 400, damping: 17 },
+            {coaches.map((coach) => (
+              <motion.div
+                key={coach.id}
+                variants={staggerItem}
+                whileHover={{
+                  y: -8,
+                  scale: 1.02,
+                  transition: { type: "spring", stiffness: 400, damping: 15 },
+                }}
+                className="group relative"
+              >
+                {/* Outer glow - CYAN permanente, más fuerte en hover */}
+                <div className="absolute inset-0 bg-[#00E5FF]/20 group-hover:bg-[#00E5FF]/40 rounded-[2.5rem] blur-2xl opacity-60 group-hover:opacity-100 transition-all duration-700" />
+
+                <div
+                  className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-[#051a20] via-[#082530] to-[#041519] aspect-[4/5] flex flex-col pt-4 transition-all duration-700"
+                  style={{
+                    boxShadow: `
+                      0 0 0 2px rgba(0, 229, 255, 0.8),
+                      0 0 20px rgba(0, 229, 255, 0.4),
+                      inset 0 0 30px rgba(0, 229, 255, 0.1)
+                    `,
                   }}
-                  className="group cursor-default"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `
+                      0 0 0 3px rgba(0, 229, 255, 1),
+                      0 0 40px rgba(0, 229, 255, 0.7),
+                      inset 0 0 50px rgba(0, 229, 255, 0.2)
+                    `;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = `
+                      0 0 0 2px rgba(0, 229, 255, 0.8),
+                      0 0 20px rgba(0, 229, 255, 0.4),
+                      inset 0 0 30px rgba(0, 229, 255, 0.1)
+                    `;
+                  }}
                 >
-                  <div className="relative overflow-hidden rounded-2xl bg-[#111] border border-white/5 hover:border-[#00E5FF]/30 transition-all duration-300 h-[140px] flex items-center justify-center">
-                    {/* Neon Corner - Top Left */}
-                    <div className="absolute top-0 left-0 w-16 h-16 pointer-events-none z-20">
-                      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[#00E5FF] to-transparent shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
-                      <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-[#00E5FF] to-transparent shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
-                      <div className="absolute top-0 left-0 w-8 h-8 bg-[#00E5FF]/20 blur-xl rounded-full" />
-                    </div>
+                  {/* Top Glossy Reflection */}
+                  <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
+                  <div className="absolute top-2 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent blur-[1px]" />
 
-                    {/* Top-left white glow spot */}
-                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-white blur-[40px] rounded-full  group-hover:blur-[50px] transition-all duration-500" />
-
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-10" />
-
-                    <div className="relative z-10 p-4 transition-transform duration-300 group-hover:scale-110">
-                      {brand.image ? (
-                        <div className="relative w-20 h-20">
-                          <Image
-                            src={brand.image}
-                            alt={brand.alt || "Brand Logo"}
-                            fill
-                            unoptimized
-                            className="object-contain"
-                          />
-                        </div>
-                      ) : (
-                        Icon && (
-                          <Icon
-                            className="w-10 h-10 text-white/70 group-hover:text-white transition-colors duration-300"
-                            strokeWidth={1.5}
-                          />
-                        )
-                      )}
-                    </div>
+                  {/* Coach Image */}
+                  <div className="relative flex-1 w-full px-4 overflow-hidden">
+                    <Image
+                      src={coach.image}
+                      alt={coach.name}
+                      fill
+                      className="object-contain object-bottom transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Shadow at the bottom of the image for better blending */}
+                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent z-10" />
                   </div>
-                </motion.div>
-              );
-            })}
+
+                  {/* Overlay Text */}
+                  <div className="relative z-20 pb-4 text-center">
+                    <span className="text-[10px] sm:text-xs font-black tracking-[0.2em] text-white/50 uppercase group-hover:text-[#00E5FF] transition-colors duration-300">
+                      FITNESS COACH
+                    </span>
+                  </div>
+
+                  {/* Shine effect - solo visible en hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                    style={{
+                      background:
+                        "linear-gradient(110deg, transparent 30%, rgba(0, 229, 255, 0.2) 50%, transparent 70%)",
+                      backgroundSize: "200% 100%",
+                    }}
+                    animate={{
+                      backgroundPosition: ["200% 0", "-200% 0"],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
 

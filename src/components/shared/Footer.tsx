@@ -240,29 +240,6 @@ export default function Footer() {
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll to Top Button */}
-        <motion.button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          whileHover={{ scale: 1.1, y: -2 }}
-          whileTap={{ scale: 0.9 }}
-          className="fixed bottom-8 right-8 w-12 h-12 rounded-full glass-liquid flex items-center justify-center hover:border-[#00e5ff]/50 hover:glow-md transition-all duration-300 group z-50"
-          aria-label="Volver arriba"
-        >
-          <svg
-            className="w-6 h-6 text-[#00e5ff] group-hover:animate-bounce"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
-        </motion.button>
       </div>
     </footer>
   );

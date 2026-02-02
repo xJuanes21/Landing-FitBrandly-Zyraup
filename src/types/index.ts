@@ -36,3 +36,12 @@ export interface ProblemSolution {
     problemIcon: LucideIcon;
     solutionIcon: LucideIcon;
 }
+
+// Features
+export interface Feature {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  size?: "normal" | "large";
+}

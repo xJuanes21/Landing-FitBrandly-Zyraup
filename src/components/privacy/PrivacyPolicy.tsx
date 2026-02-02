@@ -99,7 +99,7 @@ export default function PrivacyPolicy() {
   };
 
   return (
-    <div className="min-h-screen animated-gradient-bg grid-pattern py-32 px-4 bg-[#0A0A0A] text-white flex flex-col items-center">
+    <div className="min-h-screen py-32 px-4 bg-[#0A0A0A] text-white flex flex-col items-center">
       <div className="container-custom mx-auto max-w-4xl w-full">
         {/* Header */}
         <motion.div

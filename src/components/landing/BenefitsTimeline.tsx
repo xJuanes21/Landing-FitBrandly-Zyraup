@@ -26,19 +26,19 @@ const timelineSteps: TimelineStep[] = [
   },
   {
     id: "2",
-    period: "SEMANA 1",
+    period: "DÍA 3",
     title: "Migra tus clientes",
     description: "Importa tus clientes actuales y configura sus planes.",
   },
   {
     id: "3",
-    period: "MES 1",
+    period: "SEMANA 1",
     title: "Duplica tu capacidad",
     description: "Automatiza tareas y atiende más clientes sin esfuerzo extra.",
   },
   {
     id: "4",
-    period: "MES 3",
+    period: "MES 1",
     title: "Escala tu Imperio",
     description: "Expande tu negocio y maximiza tus ingresos.",
   },
@@ -52,7 +52,10 @@ const IconComponent = ({ index }: { index: number }) => {
 
 export default function BenefitsTimeline() {
   return (
-    <section id="timeline" className="py-24 md:py-32 relative overflow-hidden">
+    <section
+      id="beneficios"
+      className="py-24 md:py-32 relative overflow-hidden"
+    >
       {/* Background gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#00E5FF]/5 rounded-full blur-[200px] pointer-events-none" />

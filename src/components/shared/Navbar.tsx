@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
+import SubscribeModal from "./SubscribeModal";
 
 interface NavLink {
   label: string;
@@ -13,168 +14,179 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { label: "Características", href: "#features" },
-  { label: "Beneficios", href: "#benefits" },
-  { label: "Precios", href: "#pricing" },
-  { label: "Clientes", href: "#clients" },
+  { label: "Inicio", href: "/#inicio" },
+  { label: "Características", href: "/#caracteristicas" },
+  { label: "Precios", href: "/#precios" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contacto", href: "/contact" },
 ];
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     const controlNavbar = () => {
+      if (isMenuOpen) return;
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY < 10) {
+      if (currentScrollY < 50) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY.current) {
-        // Scrolling down
         setIsVisible(false);
-        setIsMenuOpen(false);
       } else {
-        // Scrolling up
         setIsVisible(true);
       }
-
       lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener("scroll", controlNavbar, { passive: true });
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [isMenuOpen]);
 
-    return () => {
-      window.removeEventListener("scroll", controlNavbar);
-    };
-  }, []);
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMenuOpen]);
 
   return (
     <>
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 w-full bg-black backdrop-blur-md border-b border-white/10"
-        style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}
+        initial={{ y: 0 }}
+        animate={{ y: isVisible ? 0 : "-100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="fixed top-0 left-0 right-0 z-[60] w-full bg-black border-b border-white/5"
       >
-        <div className="container-custom h-full">
-          <div className="relative h-16 md:h-20">
-            {/* Grid Layout: 1fr - auto - 1fr guarantees perfect center for the middle element */}
-            <div className="grid grid-cols-[1fr_auto_1fr] items-center h-full">
-              {/* Logo - Left (Aligned Start) */}
-              <div className="flex justify-start pl-6 md:pl-10">
-                <Link
-                  href="/"
-                  className="flex items-center gap-2 relative w-48 h-12 md:w-56 md:h-14"
-                >
+        <div className="container-custom h-16 md:h-28">
+          <div className="relative flex items-center justify-between h-full py-2 gap-4">
+            {/* Left: Mobile Toggle & Logo */}
+            <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="md:hidden p-2 text-white hover:text-[#00E5FF] transition-colors"
+                aria-label="Open menu"
+              >
+                <Menu className="w-8 h-8" />
+              </button>
+
+              <Link href="/" className="flex items-center gap-2 md:gap-3 group">
+                <div className="relative w-8 h-8 md:w-12 md:h-12 flex-shrink-0">
                   <Image
-                    src="/fitbrandly-logo.svg"
-                    alt="FitBrandly Logo"
+                    src="/icons/icon.png"
+                    alt="FitBrandly"
                     fill
-                    className="object-contain object-left"
+                    className="object-contain group-hover:scale-110 transition-transform duration-300"
                     priority
                   />
+                </div>
+                <span className="text-lg md:text-2xl font-black tracking-tighter text-white">
+                  Fit<span className="text-[#00E5FF]">Brandly</span>
+                </span>
+              </Link>
+            </div>
+
+            {/* Center: Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-10 absolute left-1/2 -translate-x-1/2">
+              {navLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="text-base font-bold tracking-tight text-white/70 hover:text-[#00E5FF] transition-all duration-300 relative group"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#00E5FF] group-hover:w-full transition-all duration-300 shadow-[0_0_10px_rgba(0,229,255,0.8)]" />
                 </Link>
-              </div>
+              ))}
+            </nav>
 
-              {/* Desktop Navigation - Center (Aligned Center) */}
-              <div className="hidden md:flex items-center justify-center gap-8">
-                {navLinks.map((link, index) => (
-                  <Link
-                    key={index}
-                    href={link.href}
-                    className="text-white/80 hover:text-[#00E5FF] transition-colors text-sm font-medium relative group whitespace-nowrap"
-                  >
-                    {link.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#00E5FF] group-hover:w-full transition-all duration-300" />
-                  </Link>
-                ))}
-              </div>
-
-              {/* CTA Buttons - Right (Aligned End) */}
-              <div className="hidden md:flex items-center justify-end gap-4 pr-4">
-                <Button
-                  variant="primary"
-                  size="sm"
-                  href="#pricing"
-                  className="whitespace-nowrap !py-2 !px-4 !text-sm"
-                >
-                  Comienza Gratis
-                </Button>
-                <div className="w-[1px] h-8 bg-white/10 mx-2" />{" "}
-                {/* Separator */}
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  href="/contact"
-                  className="whitespace-nowrap !py-2 !px-4 !text-sm"
-                >
-                  Contáctanos
-                </Button>
-              </div>
-
-              {/* Mobile Menu Button */}
-              <div className="md:hidden flex justify-end col-span-2 pr-4">
-                <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="text-white p-2"
-                  aria-label="Toggle menu"
-                >
-                  {isMenuOpen ? (
-                    <X className="w-6 h-6" />
-                  ) : (
-                    <Menu className="w-6 h-6" />
-                  )}
-                </button>
-              </div>
+            {/* Right: CTA Buttons */}
+            <div className="hidden md:flex items-center flex-shrink-0">
+              <Button
+                variant="primary"
+                onClick={() => setIsSubscribeOpen(true)}
+                className="whitespace-nowrap glow-sm px-6 py-3 text-base font-black tracking-tight uppercase rounded-2xl"
+              >
+                Acceso Anticipado
+              </Button>
             </div>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Premium Mobile Sidebar */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed top-16 left-0 right-0 z-40 md:hidden bg-[#0A0A0A]/95 backdrop-blur-lg border-b border-white/10"
-          >
-            <div className="max-w-7xl mx-auto px-4 py-6 space-y-4">
-              {navLinks.map((link, index) => (
-                <Link
-                  key={index}
-                  href={link.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block text-white/80 hover:text-[#00E5FF] transition-colors py-2 text-base font-medium"
-                >
-                  {link.label}
-                </Link>
-              ))}
+          <div className="fixed inset-0 z-[70] md:hidden">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
 
-              {/* CTA Button - Mobile */}
-              <div className="pt-4">
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="absolute top-0 left-0 h-full w-[80%] max-w-sm bg-black border-r border-white/10 shadow-[20px_0_50px_rgba(0,0,0,0.5)] p-8 flex flex-col pt-20"
+            >
+              <div className="flex justify-between items-center mb-12">
+                <span className="text-2xl font-black tracking-tighter text-white">
+                  MENÚ
+                </span>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 text-white/50 hover:text-[#00E5FF] transition-colors"
+                >
+                  <X className="w-8 h-8" />
+                </button>
+              </div>
+
+              <nav className="flex flex-col gap-8">
+                {navLinks.map((link, idx) => (
+                  <Link
+                    key={idx}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-2xl font-black text-white/80 hover:text-[#00E5FF] hover:translate-x-2 transition-all duration-300 flex items-center justify-between group"
+                  >
+                    {link.label}
+                    <span className="w-2 h-2 rounded-full bg-[#00E5FF] opacity-0 group-hover:opacity-100 transition-opacity shadow-[0_0_10px_#00E5FF]" />
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="mt-auto space-y-4 pt-8 border-t border-white/5">
                 <Button
                   variant="primary"
-                  size="md"
-                  className="w-full"
-                  href="#pricing"
+                  className="w-full h-14 text-lg font-bold"
+                  onClick={() => {
+                    setIsSubscribeOpen(true);
+                    setIsMenuOpen(false);
+                  }}
                 >
-                  Comienza Gratis
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="md"
-                  className="w-full mt-2"
-                  href="/contact"
-                >
-                  Contáctanos
+                  Acceso Anticipado
                 </Button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
+
+      <SubscribeModal
+        isOpen={isSubscribeOpen}
+        onClose={() => setIsSubscribeOpen(false)}
+      />
     </>
   );
 }

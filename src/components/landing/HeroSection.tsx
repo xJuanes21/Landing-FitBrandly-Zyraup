@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import SubscribeModal from "../shared/SubscribeModal";
 
 // Client-side only particles to avoid hydration mismatch
 export const Particles = () => {
@@ -55,10 +56,11 @@ const staggerContainer = {
 };
 
 export default function HeroSection() {
+  const [isSubscribeOpen, setIsSubscribeOpen] = React.useState(false);
   return (
     <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 pb-12 sm:pb-16"
+      id="inicio"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 sm:pt-36 pb-12 sm:pb-16"
     >
       {/* Animated Background with particles effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#0F0F1E] to-[#0A0A0A] z-0" />
@@ -198,13 +200,16 @@ export default function HeroSection() {
                   repeat: Infinity,
                 }}
               />
-              <button className="relative w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-[#00b8d4] to-[#00e5ff] text-[#0a0a0a] font-bold text-base sm:text-lg flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all duration-300">
-                Comienza Gratis 14 Días
+              <button
+                onClick={() => setIsSubscribeOpen(true)}
+                className="relative w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl bg-gradient-to-r from-[#00b8d4] to-[#00e5ff] text-[#0a0a0a] font-bold text-base sm:text-lg flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,229,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5)] transition-all duration-300"
+              >
+                Sé el primero en enterarte
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </motion.div>
 
-            {/* Secondary CTA */}
+            {/* Secondary CTA 
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
@@ -215,6 +220,7 @@ export default function HeroSection() {
                 Ver Demo
               </button>
             </motion.div>
+            */}
           </motion.div>
 
           {/* Trust line */}
@@ -238,26 +244,10 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator - Más sutil - Oculto en mobile */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="flex flex-col items-center gap-2 text-[#F5F5F5]/30"
-        >
-          <div className="w-[1px] h-12 bg-gradient-to-b from-[#00E5FF]/50 to-transparent" />
-        </motion.div>
-      </motion.div>
+      <SubscribeModal
+        isOpen={isSubscribeOpen}
+        onClose={() => setIsSubscribeOpen(false)}
+      />
     </section>
   );
 }

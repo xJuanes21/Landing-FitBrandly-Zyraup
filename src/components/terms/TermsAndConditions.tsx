@@ -69,7 +69,7 @@ export default function TermsAndConditions() {
   };
 
   return (
-    <div className="min-h-screen animated-gradient-bg grid-pattern py-24 px-4 bg-[#0A0A0A] text-white">
+    <div className="min-h-screen py-32 px-4 bg-[#0A0A0A] text-white">
       <div className="container-custom mx-auto">
         {/* Header */}
         <motion.div

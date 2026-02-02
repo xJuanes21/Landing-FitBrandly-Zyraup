@@ -7,19 +7,21 @@ import PricingSection from "@/components/landing/PricingSection";
 import BenefitsTimeline from "@/components/landing/BenefitsTimeline";
 import ContactForm from "@/components/shared/ContactForm";
 import FinalCTASection from "@/components/landing/FinalCTASection";
+import FeaturesSection from "@/components/landing/FeaturesSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex flex-col gap-32 md:gap-48 pb-32">
+    <main className="min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex flex-col gap-6 mb-6">
       <HeroSection />
-      <ProblemSolutionSection />
       <SocialProofSection />
+      <ProblemSolutionSection />
+      <FeaturesSection />
       <TestimonialsSection />
       <PricingSection />
       <BenefitsTimeline />
-      <FAQSection />
       <FinalCTASection />
       <ContactForm />
+      <FAQSection />
     </main>
   );
 }
