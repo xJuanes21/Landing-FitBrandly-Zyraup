@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/shared/Navbar";
 import "./globals.css";
 import Footer from "@/components/shared/Footer";
-import FloatingActionMenu from "@/components/shared/FloatingActionMenu";
+import WhatsAppButton from "@/components/shared/WhatsAppButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,7 +55,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased bg-[#0A0A0A] text-white`}>
         <Navbar />
         {children}
-        <FloatingActionMenu />
+        <WhatsAppButton />
         <Footer />
       </body>
     </html>

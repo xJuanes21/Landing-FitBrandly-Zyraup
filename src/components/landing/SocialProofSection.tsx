@@ -30,9 +30,9 @@ const coaches = [
 ];
 
 const trustBadges = [
-  { id: "1", icon: Shield, label: "Seguro SSL" },
-  { id: "2", icon: Check, label: "GDPR Compliant" },
-  { id: "3", icon: Zap, label: "99.9% Uptime" },
+  { id: "1", icon: Shield, label: "Seguridad Nivel Bancario" },
+  { id: "2", icon: Check, label: "100% Privado" },
+  { id: "3", icon: Zap, label: "Alto Rendimiento 24/7" },
 ];
 
 export default function SocialProofSection() {

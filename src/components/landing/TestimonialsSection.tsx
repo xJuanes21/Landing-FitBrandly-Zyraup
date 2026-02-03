@@ -50,7 +50,7 @@ const testimonials = [
     role: "Dueño de Gimnasio",
     image: "https://i.pravatar.cc/150?img=12",
     quote:
-      "Escalar mi gimnasio fue posible gracias a la automatización de FitBrandly.",
+      "Escalar mi metodologia para tener mas de 10 asesorados ahora es posible gracias a mi propia app.",
   },
   {
     id: 6,

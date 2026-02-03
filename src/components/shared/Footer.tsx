@@ -9,6 +9,7 @@ import {
   FileText,
   Heart,
   Zap,
+  Phone,
 } from "lucide-react";
 
 export default function Footer() {
@@ -54,6 +55,7 @@ export default function Footer() {
       text: "fitbrandly@gmail.com",
       href: "mailto:fitbrandly@gmail.com",
     },
+    { icon: Phone, text: "+57 304 6295554" },
     { icon: MapPin, text: "Cali, Valle del Cauca, Colombia" },
   ];
 

@@ -21,7 +21,7 @@ import MobileCarousel from "@/components/ui/MobileCarousel";
 const problemSolutions = [
   {
     id: "1",
-    problem: "Pierdes clientes por apps impersonales",
+    problem: "Pierdes clientes por no poder automatizar tu método",
     solution: "Tu propia app con TU identidad visual",
     problemIcon: Users,
     solutionIcon: Smartphone,
@@ -285,7 +285,7 @@ export default function ProblemSolutionSection() {
             >
               <div className="absolute inset-0 bg-[#00E5FF]/10 group-hover:bg-[#00E5FF]/20 transition-colors" />
               <span className="relative z-10 text-[#00E5FF] group-hover:text-white transition-colors duration-300">
-                ¿Necesitas algo más? Contáctanos
+                ¿Listo para lanzar tu propia app?
               </span>
               <div className="absolute inset-x-0 bottom-0 h-1 bg-[#00E5FF] shadow-[0_0_15px_rgba(0,229,255,1)] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </motion.a>

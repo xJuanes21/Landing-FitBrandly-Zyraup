@@ -22,7 +22,7 @@ const pricingPlans: PricingPlan[] = [
     period: "/mes",
     description: "Lo mínimo para empezar",
     features: [
-      "Hasta 10 usuarios",
+      "Hasta 5 usuarios",
       "Módulo de Ejercicios",
       "App personalizada",
       "Soporte email",
@@ -37,9 +37,9 @@ const pricingPlans: PricingPlan[] = [
     period: "/mes",
     description: "Lo más popular",
     features: [
-      "Hasta 20 usuarios",
+      "Hasta 10 usuarios",
       "Módulo de Ejercicios",
-      "Módulo de Alimentación",
+      "Planes Nutricionales",
       "Soporte integrado",
       "Mensajería integrada",
     ],
@@ -54,9 +54,9 @@ const pricingPlans: PricingPlan[] = [
     period: "/mes",
     description: "Máximo poder para tu marca",
     features: [
-      "Hasta 25 usuarios",
+      "Hasta 20 usuarios",
       "Módulo de Ejercicios",
-      "Módulo de Alimentación",
+      "Planes Nutricionales",
       "Chat privado",
       "Calendario de actividades",
     ],

@@ -11,7 +11,7 @@ import FeaturesSection from "@/components/landing/FeaturesSection";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex flex-col gap-6 mb-6">
+    <main className="min-h-screen bg-[#0A0A0A] text-white overflow-hidden flex flex-col gap-3 mb-6">
       <HeroSection />
       <SocialProofSection />
       <ProblemSolutionSection />
