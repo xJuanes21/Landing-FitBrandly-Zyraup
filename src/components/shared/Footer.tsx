@@ -207,39 +207,20 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="py-8 border-t border-white/10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="text-gray-500 text-sm text-center md:text-left"
             >
-              © {currentYear}{" "}
-              <span className="text-[#00e5ff] font-semibold">EASY TECH</span>.
-              Todos los derechos reservados.
+              ©{currentYear}
+              <span className="text-gray-500 font-semibold pl-2">By</span>
+              <span className="text-[#00e5ff] font-semibold pl-2">
+                Easy Technology S.A.S
+              </span>
+              . Todos los derechos reservados.
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-2 text-gray-500 text-sm"
-            >
-              <span>Hecho con</span>
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                <Heart className="w-4 h-4 text-[#00e5ff] fill-[#00e5ff]" />
-              </motion.div>
-              <span>por Zyraup Team</span>
-            </motion.div>
           </div>
         </div>
       </div>
