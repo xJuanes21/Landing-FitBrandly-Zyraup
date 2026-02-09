@@ -17,7 +17,7 @@ export default function MobileCarousel({
       className={`
         /* Mobile: Horizontal Scroll */
         flex overflow-x-auto snap-x snap-mandatory 
-        pb-12 pt-12 -my-12 px-6 scrollbar-hide
+        pb-20 pt-20 -my-20 px-4 scrollbar-hide
         items-stretch
         
         /* Desktop: Standard Grid or Flex (controlled by parent/className) */
@@ -27,7 +27,7 @@ export default function MobileCarousel({
       `}
     >
       {React.Children.map(children, (child) => (
-        <div className="snap-center shrink-0 w-[88vw] md:w-auto md:shrink-1 flex flex-col items-stretch">
+        <div className="snap-center shrink-0 w-[85vw] px-4 md:w-auto md:shrink-1 flex flex-col items-stretch">
           {child}
         </div>
       ))}

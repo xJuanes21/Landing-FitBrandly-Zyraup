@@ -100,14 +100,14 @@ export default function UnifiedCarousel({
   if (isMobile) {
     return (
       <div
-        className="overflow-visible px-4"
+        className="overflow-visible"
         onMouseEnter={() => pauseOnHover && setIsPaused(true)}
         onMouseLeave={() => pauseOnHover && setIsPaused(false)}
       >
         <div
           className={`
             flex overflow-x-auto snap-x snap-mandatory 
-            py-[100px] -my-[100px] scrollbar-hide
+            py-[120px] -my-[120px] px-4 scrollbar-hide
             ${className}
           `}
           style={{ gap: "24px" }}
@@ -116,9 +116,9 @@ export default function UnifiedCarousel({
             childrenWithHighlight.map((child, index) => (
               <div
                 key={index}
-                className="snap-center shrink-0 w-[88vw] first:ml-0 last:mr-0"
+                className="snap-center shrink-0 w-[85vw] px-4 first:ml-0 last:mr-0"
               >
-                <div className="py-10">{child}</div>
+                <div className="py-16">{child}</div>
               </div>
             ))}
         </div>
