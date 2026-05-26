@@ -17,12 +17,12 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "basic",
     name: "Básico",
-    price: 100000,
+    price: 60000,
     currency: "COP",
     period: "/mes",
     description: "Lo mínimo para empezar",
     features: [
-      "Hasta 5 usuarios",
+      "Hasta 10 usuarios",
       "Módulo de Ejercicios",
       "App personalizada",
       "Soporte email",
@@ -32,12 +32,12 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "standard",
     name: "Standard",
-    price: 160000,
+    price: 100000,
     currency: "COP",
     period: "/mes",
     description: "Lo más popular",
     features: [
-      "Hasta 10 usuarios",
+      "Hasta 20 usuarios",
       "Módulo de Ejercicios",
       "Planes Nutricionales",
       "Soporte integrado",
@@ -49,12 +49,12 @@ const pricingPlans: PricingPlan[] = [
   {
     id: "advance",
     name: "Advance",
-    price: 250000,
+    price: 180000,
     currency: "COP",
     period: "/mes",
     description: "Máximo poder para tu marca",
     features: [
-      "Hasta 20 usuarios",
+      "Hasta 50 usuarios",
       "Módulo de Ejercicios",
       "Planes Nutricionales",
       "Chat privado",

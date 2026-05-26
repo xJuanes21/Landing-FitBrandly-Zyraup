@@ -8,6 +8,7 @@ import BenefitsTimeline from "@/components/landing/BenefitsTimeline";
 import ContactForm from "@/components/shared/ContactForm";
 import FinalCTASection from "@/components/landing/FinalCTASection";
 import FeaturesSection from "@/components/landing/FeaturesSection";
+import MockupSection from "@/components/landing/MockupSection";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <TestimonialsSection />
       <PricingSection />
       <BenefitsTimeline />
+      <MockupSection />
       <FinalCTASection />
       <ContactForm />
       <FAQSection />

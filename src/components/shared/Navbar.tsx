@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
-import SubscribeModal from "./SubscribeModal";
 
 interface NavLink {
   label: string;
@@ -18,13 +17,11 @@ const navLinks: NavLink[] = [
   { label: "Características", href: "/#caracteristicas" },
   { label: "Precios", href: "/#precios" },
   { label: "FAQ", href: "/#faq" },
-  { label: "Contacto", href: "/contact" },
 ];
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -107,13 +104,14 @@ export default function Header() {
 
             {/* Right: CTA Buttons */}
             <div className="hidden md:flex items-center flex-shrink-0">
-              <Button
-                variant="primary"
-                onClick={() => setIsSubscribeOpen(true)}
-                className="whitespace-nowrap glow-sm px-6 py-3 text-base font-black tracking-tight uppercase rounded-2xl"
-              >
-                Acceso Anticipado
-              </Button>
+              <Link href="/contact" passHref>
+                <Button
+                  variant="primary"
+                  className="whitespace-nowrap glow-sm px-6 py-3 text-base font-black tracking-tighter italic uppercase rounded-2xl"
+                >
+                  Contacto Directo
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -167,26 +165,22 @@ export default function Header() {
               </nav>
 
               <div className="mt-auto space-y-4 pt-8 border-t border-white/5">
-                <Button
-                  variant="primary"
-                  className="w-full h-14 text-lg font-bold"
-                  onClick={() => {
-                    setIsSubscribeOpen(true);
-                    setIsMenuOpen(false);
-                  }}
-                >
-                  Acceso Anticipado
-                </Button>
+                <Link href="/contact" passHref className="w-full block">
+                  <Button
+                    variant="primary"
+                    className="w-full h-14 text-lg font-bold"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Contacto Directo
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
-
-      <SubscribeModal
-        isOpen={isSubscribeOpen}
-        onClose={() => setIsSubscribeOpen(false)}
-      />
     </>
   );
 }

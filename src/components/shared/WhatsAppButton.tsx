@@ -22,12 +22,7 @@ export default function WhatsAppButton() {
       onClick={openWhatsApp}
       className="fixed bottom-6 right-6 z-[100] h-14 md:h-16 flex items-center justify-center rounded-full border border-[#25D366]/30 bg-[#25D366]/10 backdrop-blur-xl shadow-[0_0_30px_rgba(37,211,102,0.3)] hover:shadow-[0_0_50px_rgba(37,211,102,0.6)] group transition-all duration-500 overflow-hidden"
     >
-      {/* Spinning Background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-[#25D366]/40 via-transparent to-transparent"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-      />
+      {/* No spinning Background */}
 
       {/* Label that slides out on hover */}
       <motion.div
